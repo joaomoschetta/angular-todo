@@ -1,13 +1,13 @@
 <section class="p-3">
-  <h2 class="h3 mb-4">Todo List</h2>
+  <h2 class="h3 mb-4 h2-ml-custom">Todo List</h2>
   
   <ul class="list-group align-items-center">
     <li class="list-group-item col-10 d-flex" *ngFor="let todo of todos" >
       <input type="text" [value]="todo.text" (change)="handleInputValueChange($event, todo)" class="m-0 col-11 align-self-center text-wrap text-break" />
       
-      <div class="col-1 d-flex justify-content-center text-center">
-        <button class="btn btn-info" title="Editar">
-          <i class="bi bi-pencil" style="color: white;"></i>
+      <div class="col-1 d-flex justify-content-center align-items-center flex-column gap-2">
+        <button class="btn btn-danger" title="Deletar" (click)="handleRemove(todo)">
+          <i class="bi bi-x-lg"></i>
         </button>
       </div>
     </li>
