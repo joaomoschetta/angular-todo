@@ -26,14 +26,17 @@ export class TodoService {
     return this.todoSubject.getValue();
   }
 
-  removeTodo(todoToRemove: TodoModel): void {
-    const todosWithoutRemovedTodo = this.getTodos.filter(
-      todo => todo !== todoToRemove
-    );
+  addTodo(todoText: string): void {
+    if (!todoText) return
 
-    this.todoSubject.next(todosWithoutRemovedTodo);
+    const currentTodos = this.getTodos;
+    const todoId = this.getHigherIdNumber();
+
+    currentTodos.push({ id: todoId, text: todoText });
+
+    this.todoSubject.next(currentTodos);
   }
-
+  
   editTodo(value: string, todoToEdit: TodoModel): void {
     const todosWithEdition = this.getTodos.map(todo => {
       if (todo === todoToEdit)
@@ -44,29 +47,20 @@ export class TodoService {
     
     this.todoSubject.next(todosWithEdition);
   }
-
-  // addTodo(todoText: string) {
-  //   const todoId = this.getHigherIdNumber();
-
-  //   this.todos.push({
-  //     id: todoId,
-  //     text: todoText
-  //   });
-  // }
-
-  // private getHigherIdNumber() {
-  //   const ids = this.todos.map(todo => todo.id);
-  //   const higherIdNumber = Math.max(...ids);
-
-  //   return higherIdNumber;
-  // }
-
-  private getById(id: number) {
-    const filteredTodo = this.getTodos.filter(
-      todo => todo.id === id
+  
+  removeTodo(todoToRemove: TodoModel): void {
+    const todosWithoutRemovedTodo = this.getTodos.filter(
+      todo => todo !== todoToRemove
     );
 
-    return filteredTodo;
+    this.todoSubject.next(todosWithoutRemovedTodo);
+  }
+
+  private getHigherIdNumber(): number {
+    const ids = this.todos.map(todo => todo.id);
+    const higherIdNumber = Math.max(...ids);
+
+    return higherIdNumber;
   }
 }
 
@@ -77,14 +71,6 @@ const initialTodos = [
   },
   {
     id: 2,
-    text: 'todo text'
-  },
-  {
-    id: 3,
-    text: 'todo text'
-  },
-  {
-    id: 4,
     text: 'todo text'
   }
 ]
