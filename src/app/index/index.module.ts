@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { IndexComponent } from './index.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { IndexComponent } from './index.component';
   ],
   imports: [
     CommonModule,
-    IndexRoutingModule
+    IndexRoutingModule,
+    FormsModule
   ]
 })
 export class IndexModule { }
